@@ -179,7 +179,7 @@ h3 {
 
 /* hero ikut bergerak saat scroll: kartu mengecil, teks dan foto bergeser dengan kecepatan berbeda */
 @supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
     .hero-card {
       transform-origin: 50% 100%;
       animation: card-out linear both;

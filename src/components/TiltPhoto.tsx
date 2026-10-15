@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-export default function TiltPhoto({ src, alt }: { src: string; alt: string }) {
+export default function TiltPhoto({ src, alt, className = "aspect-[4/5] w-[calc(100%+1.5rem)] md:w-[calc(100%+3rem)] lg:h-[min(78svh,880px,48vw)] lg:w-auto" }: { src: string; alt: string; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   function onMove(e: React.PointerEvent<HTMLDivElement>) {
@@ -24,7 +24,7 @@ export default function TiltPhoto({ src, alt }: { src: string; alt: string }) {
 
   return (
     <div
-      className="h-[420px] w-[340px] [perspective:1000px] md:aspect-[4/5] md:h-[min(78svh,880px)] md:w-auto"
+      className={`[perspective:1000px] ${className}`}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
     >

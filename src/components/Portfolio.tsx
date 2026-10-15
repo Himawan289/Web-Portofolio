@@ -30,8 +30,8 @@ export default function Portfolio() {
             <h3 className="mt-3 max-w-xl text-2xl font-semibold leading-snug">{p.title}</h3>
             <p className="mt-3 max-w-xl text-sm leading-6 text-muted">{p.desc}</p>
             {"metric" in p && p.metric && (
-              <div className="mt-auto flex items-end gap-5 pt-8">
-                <span className="text-gradient text-6xl font-extrabold [font-family:var(--font-display)]">{p.metric.value}</span>
+              <div className="mt-auto flex flex-col items-start gap-2 pt-8 sm:flex-row sm:items-end sm:gap-5">
+                <span className="text-gradient text-5xl font-extrabold sm:text-6xl [font-family:var(--font-display)]">{p.metric.value}</span>
                 <span className="max-w-xs pb-2 text-sm text-white/70">{p.metric.label}</span>
               </div>
             )}

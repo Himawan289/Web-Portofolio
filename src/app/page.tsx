@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <div id="home" className="snap-sec relative mx-auto w-full max-w-[1800px] px-3 pt-3 md:px-5 md:pt-5">
-        <div className="hero-card relative flex min-h-[calc(100svh-1.5rem)] flex-col overflow-hidden rounded-3xl border border-white/5 bg-surface shadow-2xl shadow-black/40 md:min-h-[min(calc(100svh-2.5rem),1100px)]">
+        <div className="hero-card relative flex min-h-[560px] flex-col overflow-hidden rounded-3xl border border-white/5 bg-surface shadow-2xl shadow-black/40 md:min-h-[min(calc(100svh-2.5rem),1100px)]">
           <Hero />
         </div>
       </div>

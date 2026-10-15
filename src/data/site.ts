@@ -5,6 +5,8 @@ export const site = {
   firstName: "Dimas Respati",
   role: "IT Governance, GRC & ITSM Specialist",
   photo: "/foto.png",
+  // Foto kedua (cutout transparan, pose berbeda) untuk section About.
+  photo2: "/foto-2.png",
   bio: "Lulusan Sistem Informasi Universitas Airlangga dengan minat kuat di Tata Kelola TI, Risiko, Kepatuhan (GRC), dan Analisis Bisnis. Bertanggung jawab, disiplin, dan mudah beradaptasi, baik mandiri maupun dalam tim.",
   about:
     "Saya merupakan lulusan Sistem Informasi Universitas Airlangga dengan minat yang kuat di bidang Tata Kelola TI, Risiko, Kepatuhan (GRC), dan Analisis Bisnis. Saya bertanggung jawab, disiplin, dan mudah beradaptasi, serta mampu bekerja secara efektif baik secara mandiri maupun dalam tim. Dengan latar belakang akademik dan pengalaman yang saya miliki, saya siap berkontribusi melalui keterampilan, kemauan untuk belajar, dan komitmen menghasilkan pekerjaan yang berkualitas.",
@@ -14,7 +16,7 @@ export const site = {
   emailParts: { user: "respatihimawan", host: "gmail.com" },
   linkedin: "https://linkedin.com/in/dimasrespati/",
   // Isi dengan URL profil Instagram (contoh: "https://instagram.com/namaakun"). Kosong = panel tampil placeholder.
-  instagram: "",
+  instagram: "https://instagram.com/himawan289",
   frameworks: ["COBIT 2019", "ITIL v4", "ISO/IEC 27001", "BPMN", "Value Chain Analysis"],
   skills: [
     {

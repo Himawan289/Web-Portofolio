@@ -51,12 +51,12 @@ function Panel({
   caption: string;
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <div className="relative">
         <span className={`absolute left-0 top-0 z-10 grid h-[4.5rem] w-[4.5rem] place-items-center rounded-3xl shadow-2xl shadow-black/50 ${badgeClass}`}>{badge}</span>
         <WindowFrame title={windowTitle}>{children}</WindowFrame>
       </div>
-      <div className="mt-6 flex items-center gap-5">
+      <div className="mt-6 flex min-w-0 items-center gap-5">
         {qr ? (
           <Qr value={qr} />
         ) : (
@@ -72,11 +72,81 @@ function Panel({
 }
 
 const linkCls = "hover:underline underline-offset-4";
-const placeholder = (text: string) => <div className="grid h-full w-full place-items-center p-6 text-center text-sm text-muted">{text}</div>;
+
+const avatar = "/foto-avatar.jpg";
+
+/** Tiruan tampilan profil LinkedIn (bukan screenshot): isi diambil dari data situs. */
+function LinkedInMock() {
+  return (
+    <div className="flex h-full flex-col bg-[#0d1b2e]" aria-hidden>
+      <div className="h-14 shrink-0 bg-gradient-to-r from-[#0A66C2]/70 via-[#12457a] to-[#0b2540]" />
+      <div className="px-5 pb-3">
+        <div className="-mt-8 flex items-end justify-between">
+          <span className="h-16 w-16 overflow-hidden rounded-full border-2 border-[#0d1b2e] bg-surface">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={avatar} alt="" className="h-full w-full object-cover" />
+          </span>
+          <span className="flex gap-1.5">
+            <span className="h-5 w-14 rounded-full bg-[#0A66C2]" />
+            <span className="h-5 w-12 rounded-full border border-white/25" />
+          </span>
+        </div>
+        <p className="mt-2 text-[13px] font-semibold leading-tight">{site.fullName}</p>
+        <p className="mt-0.5 text-[11px] leading-snug text-white/70">{site.role}</p>
+        <p className="mt-0.5 text-[10px] text-muted">Surabaya, Indonesia · Universitas Airlangga</p>
+        <div className="mt-2.5 space-y-1.5 border-t border-white/10 pt-2.5">
+          {site.experience.slice(0, 2).map((e) => (
+            <p key={e.org} className="flex gap-2 text-[11px] leading-tight">
+              <span className="mt-0.5 h-3.5 w-3.5 shrink-0 rounded-sm bg-white/15" />
+              <span className="truncate">
+                {e.role} <span className="text-muted">· {e.org}</span>
+              </span>
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Tiruan tampilan profil Instagram: foto asli dari situs, angka-angka berupa garis kosong. */
+function InstagramMock({ photos }: { photos: string[] }) {
+  return (
+    <div className="flex h-full flex-col bg-[#0d1b2e] p-4" aria-hidden>
+      <div className="flex items-center gap-4">
+        <span className="rounded-full bg-[linear-gradient(45deg,#f9a03c,#e1306c_50%,#833ab4)] p-[2px]">
+          <span className="block h-16 w-16 overflow-hidden rounded-full border-2 border-[#0d1b2e] bg-surface">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={avatar} alt="" className="h-full w-full object-cover" />
+          </span>
+        </span>
+        <div className="flex-1">
+          <p className="text-[13px] font-semibold leading-tight">{site.instagram.split("/").filter(Boolean).pop()}</p>
+          <div className="mt-2 flex gap-4">
+            {[0, 1, 2].map((i) => (
+              <span key={i} className="space-y-1">
+                <span className="block h-2 w-7 rounded bg-white/25" />
+                <span className="block h-1.5 w-9 rounded bg-white/10" />
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p className="mt-3 text-[11px] leading-snug text-white/70">{site.role}</p>
+      <div className="mt-3 grid min-h-0 flex-1 grid-cols-3 gap-1">
+        {photos.map((src) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img key={src} src={src} alt="" className="h-full w-full object-cover" />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function ContactBlock() {
   const linkedinShot = find(["linkedin-profil.png", "linkedin-profil.jpg"]);
   const instaShot = find(["instagram-profil.png", "instagram-profil.jpg"]);
+  const instaPhotos = ["foto-wisuda.jpg", "foto-sidang.jpg", "prestasi/juara-2-business-plan.jpg"].filter((f) => find([f])).map((f) => `/${f}`);
   const { user, host } = site.emailParts;
 
   return (
@@ -86,7 +156,7 @@ export default function ContactBlock() {
         Mari bekerja sama<span className="text-accent">.</span>
       </h2>
 
-      <div className="mt-16 grid gap-20 lg:grid-cols-3 lg:gap-10 xl:gap-14">
+      <div className="mt-16 grid grid-cols-1 gap-20 lg:grid-cols-3 lg:gap-10 xl:gap-14">
         <Panel
           badge={
             <svg width="38" height="38" viewBox="0 0 24 24" fill="#fff" aria-hidden>
@@ -107,7 +177,7 @@ export default function ContactBlock() {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={`/${linkedinShot}`} alt="Tampilan profil LinkedIn" className="h-full w-full object-cover object-top" />
           ) : (
-            placeholder("Screenshot profil LinkedIn akan ditambahkan")
+            <LinkedInMock />
           )}
         </Panel>
 
@@ -137,7 +207,7 @@ export default function ContactBlock() {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={`/${instaShot}`} alt="Tampilan profil Instagram" className="h-full w-full object-cover object-top" />
           ) : (
-            placeholder("Screenshot profil Instagram akan ditambahkan")
+            <InstagramMock photos={instaPhotos} />
           )}
         </Panel>
 
