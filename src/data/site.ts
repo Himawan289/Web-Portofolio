@@ -44,6 +44,7 @@ export const site = {
   experience: [
     {
       org: "DSITD Universitas Airlangga",
+      tags: ["ISO 27001", "Risk Register", "Data Center"],
       role: "IT Governance Intern",
       period: "Agu 2026 – Sekarang",
       points: [
@@ -53,6 +54,7 @@ export const site = {
     },
     {
       org: "PT PAL Indonesia",
+      tags: ["Dashboard GRC", "SLE/ALE", "KPI & SLA"],
       role: "IT Governance Intern",
       period: "Feb 2025 – Jul 2025",
       points: [
@@ -63,6 +65,7 @@ export const site = {
     },
     {
       org: "PT Vido Garment",
+      tags: ["BPMN", "Value Chain", "Enterprise Architecture"],
       role: "Enterprise Architecture & Digital Transformation Analyst",
       period: "Aug 2024 – Dec 2024",
       points: [
@@ -118,14 +121,17 @@ export const site = {
     { badge: "Juara 2", title: "International Business Plan Competition", issuer: "Universitas Warmadewa, 2025", file: "juara-2-business-plan.jpg" },
     { badge: "Co-author", title: "Publikasi ilmiah RegTech Governance", issuer: "ICOMCos 2026", file: "publikasi-icomcos-2026.jpg" },
   ],
+  // level: 1 = Dasar, 2 = Menengah, 3 = Mahir. Sesuaikan dengan kemampuan sebenarnya.
   skillGroups: [
-    { title: "Tata Kelola & Framework", items: ["COBIT 2019", "ITIL v4", "ISO 27001", "BPMN", "Value Chain Analysis"] },
-    { title: "GRC Tooling", items: ["Risk Register", "CISO Assistant", "eramba"] },
-    { title: "ITSM Tooling", items: ["GLPI", "Docker"] },
-    { title: "QA & Testing", items: ["Selenium", "Katalon", "Postman"] },
-    { title: "Office & Desain", items: ["Microsoft Word", "Microsoft Excel", "Canva", "Figma"] },
-    { title: "Pengembangan", items: ["Laravel", "Django", "Python", "PostgreSQL", "MySQL", "Bun", "Next.js"] },
+    { title: "Tata Kelola & Framework", level: 3, items: ["COBIT 2019", "ITIL v4", "ISO 27001", "BPMN", "Value Chain Analysis"] },
+    { title: "GRC Tooling", level: 2, items: ["Risk Register", "CISO Assistant", "eramba"] },
+    { title: "ITSM Tooling", level: 2, items: ["GLPI", "Docker"] },
+    { title: "QA & Testing", level: 2, items: ["Selenium", "Katalon", "Postman"] },
+    { title: "Office & Desain", level: 3, items: ["Microsoft Word", "Microsoft Excel", "Canva", "Figma"] },
+    { title: "Pengembangan", level: 2, items: ["Laravel", "Django", "Python", "PostgreSQL", "MySQL", "Bun", "Next.js"] },
   ],
+  // Skill unggulan: ditampilkan menonjol di section Skill.
+  featuredSkills: ["COBIT 2019", "ITIL v4", "ISO 27001", "Risk Register", "BPMN"],
   tools: ["Microsoft Word", "Microsoft Excel", "Canva", "Figma"],
   languages: ["Bahasa Indonesia", "Bahasa Inggris"],
   softSkills: ["Teamwork", "Responsibility", "Time Management"],

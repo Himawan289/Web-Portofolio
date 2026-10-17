@@ -1,160 +1,119 @@
 @import "tailwindcss";
 
+/* Default = hitam netral dengan aksen cyan. Tema terang aktif lewat data-theme="light" di <html>. */
 :root {
-  --background: #07233a;
-  --surface: #04192b;
-  --foreground: #ffffff;
-  --muted: #8fa6b8;
-  --accent: #4fc3e8;
-  --chip: #0e7c9a;
+  --bg: #151515;
+  --nav: #1c1c1c;
+  --card: #232323;
+  --line: rgb(255 255 255 / 0.1);
+  --fg: #f5f5f5;
+  --muted: #9b9b9b;
+  --accent: #f5f5f5;
+  --solid: #ffffff;
+  --on-solid: #151515;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #fafafa;
+  --nav: #f0f0f0;
+  --card: #ffffff;
+  --line: rgb(0 0 0 / 0.12);
+  --fg: #171717;
+  --muted: #6a6a6a;
+  --accent: #171717;
+  --solid: #171717;
+  --on-solid: #fafafa;
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-nav: var(--nav);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
-  --color-chip: var(--chip);
-  --font-sans: var(--font-roboto), system-ui, sans-serif;
-  --font-display: var(--font-montserrat), system-ui, sans-serif;
+  --color-solid: var(--solid);
+  --color-on-solid: var(--on-solid);
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
 }
 
-/* Desktop: scroll berhenti per section supaya fokus ke satu menu */
-@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+/* Semua ukuran rem ikut membesar halus dari HP (15px) sampai layar lebar (18px) */
+html {
+  font-size: clamp(15px, 0.5vw + 10px, 18px);
+  scroll-padding-top: 4rem;
+}
+
+/* Tipografi fluid: tumbuh mengikuti lebar layar, dibatasi min dan maks */
+.t-display {
+  font-size: clamp(2.4rem, 1rem + 6.4vw, 7.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.t-h2 {
+  font-size: clamp(2rem, 1.1rem + 3.4vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+.t-h3 {
+  font-size: clamp(1.6rem, 1rem + 2.2vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+.t-lead {
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.4rem);
+  line-height: 1.7;
+}
+@media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
   }
 }
-.snap-sec {
-  scroll-snap-align: start;
-  scroll-margin-top: 5rem;
-}
-#home,
-#contact {
-  scroll-margin-top: 0;
-}
-
 
 body {
-  background:
-    radial-gradient(900px 500px at 12% -5%, #11507a 0%, transparent 60%),
-    radial-gradient(800px 600px at 95% 40%, #0b3a5a 0%, transparent 55%),
-    radial-gradient(900px 600px at 10% 85%, #0c3f5f 0%, transparent 55%),
-    var(--background);
-  background-attachment: fixed;
-  color: var(--foreground);
-  font-family: var(--font-roboto), system-ui, sans-serif;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-display), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
   background: var(--accent);
-  color: var(--surface);
+  color: var(--bg);
 }
 
-.text-gradient {
-  background: linear-gradient(100deg, #8be3ff 0%, #4fc3e8 45%, #2a8fd6 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
-.text-gold {
-  background: linear-gradient(100deg, #fff1b8 0%, #f5c04a 50%, #e39b1f 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 80%);
-}
-
-/* kartu dengan sorotan yang mengikuti kursor */
-.spot {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
-    var(--surface);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-.spot::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, -50%), rgba(79, 195, 232, 0.16), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-.spot:hover {
-  border-color: rgba(79, 195, 232, 0.35);
-}
-.spot:hover::before {
-  opacity: 1;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(var(--r, 0deg));
-  }
-  50% {
-    transform: translateY(-8px) rotate(var(--r, 0deg));
-  }
-}
 @keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 rgba(79, 195, 232, 0.5);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
   }
   100% {
-    box-shadow: 0 0 0 10px rgba(79, 195, 232, 0);
+    box-shadow: 0 0 0 8px transparent;
   }
 }
-
-.float {
-  transform: rotate(var(--r, 0deg));
-}
-.dot-live {
-  animation: pulse-ring 1.8s ease-out infinite;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  .float {
-    animation: float 6s ease-in-out infinite;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
   .dot-live {
-    animation: none;
+    animation: pulse-ring 2s ease-out infinite;
   }
 }
 
-/* muncul halus saat di-scroll + progress bar, tanpa JS */
+/* Muncul halus saat di-scroll + progress bar, tanpa JS */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal {
       animation: rise linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 30%;
+      animation-range: entry 0% entry 25%;
     }
     @keyframes rise {
       from {
         opacity: 0;
-        transform: translateY(28px) scale(0.98);
+        transform: translateY(18px);
       }
       to {
         opacity: 1;
@@ -177,71 +136,22 @@ h3 {
   }
 }
 
-/* hero ikut bergerak saat scroll: kartu mengecil, teks dan foto bergeser dengan kecepatan berbeda */
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
-    .hero-card {
-      transform-origin: 50% 100%;
-      animation: card-out linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100vh;
-    }
-    .hero-text {
-      animation: text-out linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 70vh;
-    }
-    .hero-photo {
-      animation: photo-out linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100vh;
-    }
-    @keyframes card-out {
-      to {
-        transform: scale(0.92);
-        border-radius: 3rem;
-      }
-    }
-    @keyframes text-out {
-      to {
-        transform: translateY(90px);
-        opacity: 0;
-      }
-    }
-    @keyframes photo-out {
-      to {
-        transform: translateY(-50px) scale(1.07);
-      }
-    }
-  }
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }
 
-/* Rel slider: sejajar dengan konten section lain, tapi bisa digeser sampai tepi layar */
-.rail {
-  --rail: max(1.5rem, calc((100vw - 1600px) / 2 + 1.5rem));
-  padding-inline: var(--rail);
-  scroll-padding-inline: var(--rail);
-}
-@media (min-width: 768px) {
-  .rail {
-    --rail: max(3rem, calc((100vw - 1600px) / 2 + 3rem));
-  }
-}
-@media (min-width: 1024px) {
-  .rail {
-    --rail: max(4rem, calc((100vw - 1600px) / 2 + 4rem));
-  }
-}
-
-/* Pop-up foto: muncul dan hilang dengan fade + zoom halus */
+/* Pop-up foto: fade + zoom halus */
 dialog.pop {
   opacity: 0;
-  transform: translateY(18px) scale(0.94);
+  transform: translateY(14px) scale(0.96);
   transition:
-    opacity 0.35s ease,
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    overlay 0.35s allow-discrete,
-    display 0.35s allow-discrete;
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
 }
 dialog.pop[open] {
   opacity: 1;
@@ -251,19 +161,19 @@ dialog.pop::backdrop {
   background: rgb(0 0 0 / 0);
   backdrop-filter: blur(0);
   transition:
-    background 0.35s ease,
-    backdrop-filter 0.35s ease,
-    overlay 0.35s allow-discrete,
-    display 0.35s allow-discrete;
+    background 0.3s ease,
+    backdrop-filter 0.3s ease,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
 }
 dialog.pop[open]::backdrop {
   background: rgb(0 0 0 / 0.8);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(4px);
 }
 @starting-style {
   dialog.pop[open] {
     opacity: 0;
-    transform: translateY(18px) scale(0.94);
+    transform: translateY(14px) scale(0.96);
   }
   dialog.pop[open]::backdrop {
     background: rgb(0 0 0 / 0);
@@ -274,5 +184,22 @@ dialog.pop[open]::backdrop {
   dialog.pop,
   dialog.pop::backdrop {
     transition: none;
+  }
+}
+
+/* Isi panel pengalaman masuk satu per satu */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up {
+    animation: fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }
